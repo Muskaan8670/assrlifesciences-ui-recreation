@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assr Life Sciences</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+     <div id="preloader">
+        <i class="fa-solid fa-heart-pulse"></i>
+    </div>
+
+    <div id="top-header"></div>
+    <header id="navbar"></header>
+
+    <section class="about-hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Stokist</h1>
+
+        <div class="breadcrumb">
+            <a href="index.html">assrlifesciences.com</a>
+            <span>›</span>
+            <p>Stokist</p>
+        </div>
+    </div>
+    </section>
+
+    <section class="stockist-section">
+
+    <h2>Select City</h2>
+
+    <select id="citySelect">
+        <option value="hatsingimari">HATSINGIMARI</option>
+        <option value="dhubri">DHUBRI</option>
+        <option value="kishanganj">KISHANGANJ</option>
+        <option value="goalpara">GOALPARA</option>
+        <option value="kamrup">KAMRUP</option>
+    </select>
+
+    <div class="stockist-card">
+
+        <div class="stockist-title" id="stockistName"></div>
+
+        <div class="stockist-info" id="stockistInfo"></div>
+
+    </div>
+
+    </section>
+
+    <footer id="footer-section"></footer>
+    <script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("top-header").innerHTML = data;
+        });
+        fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        setActiveNav();   // run after navbar loads
+    });
+
+    function setActiveNav() {
+        const currentPage = window.location.pathname.split("/").pop();
+
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer-section").innerHTML = data;
+    });
+
+    const stockists = {
+        hatsingimari: {
+            name: "M/S SAHA DRUG DISTRIBUTORS",
+            details: [
+                { icon: "fa-bookmark", label: "GSTIN", value: "18KSUP1318R1ZF" },
+                { icon: "fa-bookmark", label: "DL-NO", value: "DHB/5501/5502" },
+                { icon: "fa-phone", label: "PHONE", value: "9957056533" },
+                { icon: "fa-location-dot", label: "LOCATION", value: "HATSINGIMARI, MAHAAYA NAGAR, DHUBRI - 783135" }
+            ]
+        },
+
+        dhubri: {
+            name: "MAEIN PHARMACEUTICALS",
+            details: [
+                { icon: "fa-bookmark", label: "DL-NO", value: "D/OL/DHB/8355&D/OL/DHB/8356" },
+                { icon: "fa-phone", label: "PHONE", value: "7002588557" },
+                { icon: "fa-location-dot", label: "LOCATION", value: "DMCH ROAD, JHARGRARPAR DHUBRI - 783324" }
+            ]
+        },
+
+        kishanganj: {
+            name: "Manobkalan Health Care Private Limited",
+            details: [
+                { icon: "fa-bookmark", label: "GSTIN", value: "10AARCM4049D1ZP" },
+                { icon: "fa-phone", label: "PHONE", value: "9933550830" },
+                { icon: "fa-location-dot", label: "LOCATION", value: "Kishanganj, Halim Chowk" }
+            ]
+        },
+
+        goalpara: {
+            name: "KHAN ENTERPRISE",
+            details: [
+                { icon: "fa-bookmark", label: "DL-NO", value: "GRP-5826/27" },
+                { icon: "fa-phone", label: "PHONE", value: "9577344773" },
+                { icon: "fa-location-dot", label: "LOCATION", value: "PANCHARATNA ROAD, GOALPARA - 783101" }
+            ]
+        },
+
+        kamrup: {
+            name: "PAWAN PHARMACEUTICL&SURGICAL",
+            details: [
+                { icon: "fa-bookmark", label: "GSTIN", value: "18BCRP8279G1ZO" },
+                { icon: "fa-bookmark", label: "DL-NO", value: "KMP/17513/14" },
+                { icon: "fa-phone", label: "PHONE", value: "7002780872" },
+                { icon: "fa-location-dot", label: "LOCATION", value: "SANI BAZAR ROAD, BOKO, KAMRUP - 781123" }
+            ]
+        }
+    };
+
+    const citySelect = document.getElementById("citySelect");
+
+    function updateStockist(city) {
+        const stockist = stockists[city];
+
+        document.getElementById("stockistName").textContent = stockist.name;
+
+        const stockistInfo = document.getElementById("stockistInfo");
+        stockistInfo.innerHTML = "";
+
+        stockist.details.forEach(detail => {
+            stockistInfo.innerHTML += `
+                <p>
+                    <i class="fa-solid ${detail.icon}"></i>
+                    ${detail.label}: ${detail.value}
+                </p>
+            `;
+        });
+    }
+
+    citySelect.addEventListener("change", function () {
+        updateStockist(this.value);
+    });
+
+    updateStockist("hatsingimari");
+
+    window.addEventListener("load", function () {
+        setTimeout(() => {
+            document.getElementById("preloader").classList.add("fade-out");
+        }, 2000);
+    });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assr Life Sciences</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div id="preloader">
+    <i class="fa-solid fa-heart-pulse"></i>
+</div>
+
+<div id="top-header"></div>
+<header id="navbar"></header>
+
+<section class="about-hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Shop</h1>
+
+        <div class="breadcrumb">
+            <a href="index.html">assrlifesciences.com</a>
+            <span>›</span>
+            <p>Shop</p>
+        </div>
+    </div>
+</section>
+
+<section class="shop-section">
+
+    <div class="shop-topbar">
+
+        <div class="shop-result">
+            Showing <span id="resultCount"></span> results
+        </div>
+
+        <select id="sortSelect">
+            <option value="default">Default sorting</option>
+            <option value="popularity">Sort by popularity</option>
+            <option value="rating">Sort by average rating</option>
+            <option value="latest">Sort by latest</option>
+            <option value="low-high">Sort by price: low to high</option>
+            <option value="high-low">Sort by price: high to low</option>
+        </select>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+
+    </div>
+
+    <div class="shop-wrapper">
+
+        <div class="products-grid" id="productsGrid"></div>
+
+        <div class="shop-sidebar">
+
+            <div class="filter-box">
+                <h3>Filter By Price</h3>
+
+                <input type="range" id="priceRange" min="40" max="350" value="200">
+
+                <div class="filter-row">
+                    <button id="filterBtn">Filter</button>
+                    <p>Price: ₹40 — ₹<span id="priceValue">200</span></p>
+                </div>
+            </div>
+
+            <div class="category-box">
+                <h3>Categories</h3>
+                <button class="category-btn">Medicine</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+
+</section>
+
+<footer id="footer-section"></footer>
+
+<script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("top-header").innerHTML = data;
+        });
+
+    fetch("navbar.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+            setActiveNav();
+        });
+
+    function setActiveNav() {
+        const currentPage = window.location.pathname.split("/").pop();
+
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    const products = [
+        { name: "Assr-Zyme-Plus", price: 270, image: "images/Assr-Zyme-Plus.webp", popularity: 90, rating: 4.2, latest: 5 },
+        { name: "Assrmox-CV-625", price: 270, image: "images/Assrmox-CV-625.webp", popularity: 80, rating: 4.6, latest: 4 },
+        { name: "Assrpain-DPS", price: 99, image: "images/Assrpain-DPS.webp", popularity: 90, rating: 4.2, latest: 5 },
+        { name: "Assrpain-P", price: 55, image: "images/Assrpain-P.webp", popularity: 80, rating: 4.1, latest: 3 },
+        { name: "Assrpain-SP", price: 190, image: "images/Assrpain-SP.webp", popularity: 90, rating: 4.7, latest: 5 },
+        { name: "Assrpan-40", price: 130, image: "images/Assrpan-40.webp", popularity: 75, rating: 4.5, latest: 1 },
+        { name: "Assrpan-D", price: 99, image: "images/Assrpan-D.webp", popularity: 90, rating: 4.2, latest: 5 },
+        { name: "Assrpan-ETR", price: 85, image: "images/Assrpan-ETR.webp", popularity: 82, rating: 4.7, latest: 2 },
+        { name: "AssrVit-Gold", price: 145, image: "images/AssrVit-Gold.webp", popularity: 85, rating: 4.6, latest: 3 },
+        { name: "Cthrassr-CZ", price: 350, image: "images/Cthrassr-CZ.webp", popularity: 87, rating: 4.8, latest: 5 },
+        { name: "Esmoprassr-D", price: 130, image: "images/Esmoprassr-D.webp", popularity: 92, rating: 4.3, latest: 4 },
+        { name: "Heptassr-DS", price: 155, image: "images/Heptassr-DS.webp", popularity: 86, rating: 4.4, latest: 3 },
+        { name: "Kaam-Again-TD", price: 120, image: "images/Kaam-Again-TD.webp", popularity: 87, rating: 4.7, latest: 5 },
+        { name: "LM-ASSR-M", price: 80, image: "images/LM-ASSR-M.webp", popularity: 80, rating: 4.6, latest: 4 }
+    ];
+
+    const productsGrid = document.getElementById("productsGrid");
+    const searchInput = document.getElementById("searchInput");
+    const priceRange = document.getElementById("priceRange");
+    const priceValue = document.getElementById("priceValue");
+    const resultCount = document.getElementById("resultCount");
+
+    let filteredProducts = [...products];
+    let currentPage = 1;
+    const productsPerPage = 9;
+
+    function renderProducts(items, page = 1) {
+        productsGrid.innerHTML = "";
+
+        const start = (page - 1) * productsPerPage;
+        const end = start + productsPerPage;
+
+        const paginatedItems = items.slice(start, end);
+
+        paginatedItems.forEach(product => {
+            productsGrid.innerHTML += `
+                <div class="shop-card">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+
+                    <div class="product-overlay">
+                        <button class="icon-btn" onclick='addToCart(${JSON.stringify(product)})'>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+
+                        <button class="icon-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <h4>${product.name}</h4>
+                <p>₹${product.price}</p>
+            </div>
+            `;
+        });
+
+        resultCount.textContent = `${start + 1}-${Math.min(end, items.length)} of ${items.length}`;
+    }
+
+    function renderPagination(items) {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = "";
+
+        const totalPages = Math.ceil(items.length / productsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+            pagination.innerHTML += `
+                <button class="${i === currentPage ? "active" : ""}" onclick="goToPage(${i})">${i}</button>
+            `;
+        }
+    }
+
+    function goToPage(page) {
+        currentPage = page;
+        renderProducts(filteredProducts, currentPage);
+        renderPagination(filteredProducts);
+    }
+
+    function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push(product);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert(product.name + " added to cart!");
+    }
+
+    searchInput.addEventListener("input", function () {
+        const searchValue = this.value.toLowerCase();
+
+        filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(searchValue)
+        );
+
+        currentPage = 1;
+        renderProducts(filteredProducts, currentPage);
+        renderPagination(filteredProducts);
+    });
+
+    document.getElementById("sortSelect").addEventListener("change", function () {
+
+        if (this.value === "default") filteredProducts = [...products];
+        if (this.value === "popularity") filteredProducts.sort((a,b)=>b.popularity-a.popularity);
+        if (this.value === "rating") filteredProducts.sort((a,b)=>b.rating-a.rating);
+        if (this.value === "latest") filteredProducts.sort((a,b)=>a.latest-b.latest);
+        if (this.value === "low-high") filteredProducts.sort((a,b)=>a.price-b.price);
+        if (this.value === "high-low") filteredProducts.sort((a,b)=>b.price-a.price);
+
+        renderProducts(filteredProducts, currentPage);
+        renderPagination(filteredProducts);
+    });
+
+    priceRange.addEventListener("input", function () {
+        priceValue.textContent = this.value;
+    });
+
+    document.getElementById("filterBtn").addEventListener("click", function () {
+        filteredProducts = products.filter(product =>
+            product.price >= 40 && product.price <= priceRange.value
+        );
+
+        currentPage = 1;
+        renderProducts(filteredProducts, currentPage);
+        renderPagination(filteredProducts);
+    });
+
+    renderProducts(filteredProducts, currentPage);
+    renderPagination(filteredProducts);
+
+    fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("footer-section").innerHTML = data;
+    });
+
+    window.addEventListener("load", function () {
+    setTimeout(() => {
+        document.getElementById("preloader").classList.add("fade-out");
+    }, 2000);
+});
+
+</script>
+
+</body>
+</html>

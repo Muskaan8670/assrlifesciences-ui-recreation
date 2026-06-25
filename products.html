@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assr Life Sciences</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+     <div id="preloader">
+        <i class="fa-solid fa-heart-pulse"></i>
+    </div>
+
+    <div id="top-header"></div>
+    <header id="navbar"></header>
+
+     <section class="about-hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Products</h1>
+
+        <div class="breadcrumb">
+            <a href="index.html">assrlifesciences.com</a>
+            <span>›</span>
+            <p>Products</p>
+        </div>
+    </div>
+</section>
+
+<section class="products-section">
+    <div class="products-container" id="products-container"></div>
+</section>
+
+    <footer id="footer-section"></footer>
+
+<script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("top-header").innerHTML = data;
+        });
+        fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        setActiveNav();   // run after navbar loads
+    });
+
+    function setActiveNav() {
+        const currentPage = window.location.pathname.split("/").pop();
+
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer-section").innerHTML = data;
+    });
+
+    const products = [
+    {
+        name: "Assrpan-40",
+        image: "images/Assrpan-40.webp"
+    },
+    {
+        name: "Assrpain-SP",
+        image: "images/Assrpain-SP.webp"
+    },
+    {
+        name: "Assrpain-P",
+        image: "images/Assrpain-P.webp"
+    },
+    {
+        name: "Assrpan-DPS",
+        image: "images/Assrpain-DPS.webp"
+    },
+    {
+        name: "Assrmox-CV 625",
+        image: "images/Assrmox-CV-625.webp"
+    },
+    {
+        name: "AssrZyme-Plus",
+        image: "images/Assr-Zyme-Plus.webp"
+    },
+    {
+        name: "AssrVit-L",
+        image: "images/AssrVit-L.webp"
+    },
+    {
+        name: "AssrVit-Gold",
+        image: "images/AssrVit-Gold.webp"
+    },
+    {
+        name: "Assrpan-ETR",
+        image: "images/Assrpan-ETR.webp"
+    },
+    {
+        name: "Assrpan-D",
+        image: "images/Assrpan-D.webp"
+    },
+    {
+        name: "LMASSR-M",
+        image: "images/LM-ASSR-M.webp"
+    },
+    {
+        name: "Kaam Again-TD",
+        image: "images/Kaam-Again-TD.webp"
+    },
+    {
+        name: "Heptassr-DS",
+        image: "images/Heptassr-DS.webp"
+    },
+    {
+        name: "Esmoprassr-D",
+        image: "images/Esmoprassr-D.webp"
+    },
+    {
+        name: "Cthrassr-CZ",
+        image: "images/Cthrassr-CZ.webp"
+    }
+];
+
+    const productsContainer = document.getElementById("products-container");
+
+    products.forEach(product => {
+        productsContainer.innerHTML += `
+            <div class="product-card">
+                <div class="product-info">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info-name">${product.name}</div>
+                </div>
+                <div class="product-name">${product.name}</div>
+            </div>
+        `;
+    });  
+    
+    window.addEventListener("load", function () {
+    setTimeout(() => {
+        document.getElementById("preloader").classList.add("fade-out");
+    }, 2000);
+});
+
+</script>
+    <script src="script.js"></script>
+</body>
+</html>

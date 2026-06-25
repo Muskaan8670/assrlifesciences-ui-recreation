@@ -112,3 +112,4 @@ closeVideo.addEventListener("click", () => {
     popupVideo.pause();
     popupVideo.currentTime = 0;
 });
+

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assr Life Sciences</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div id="preloader">
+    <i class="fa-solid fa-heart-pulse"></i>
+</div>
+
+<div id="top-header"></div>
+<header id="navbar"></header>
+
+<section class="about-hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Shop</h1>
+
+        <div class="breadcrumb">
+            <a href="index.html">assrlifesciences.com</a>
+            <span>›</span>
+            <p>Shop</p>
+        </div>
+    </div>
+</section>
+
+<section class="cart-section">
+    <div id="cartContainer"></div>
+</section>
+
+<footer id="footer-section"></footer>
+
+<script>
+    fetch("header.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("top-header").innerHTML = data;
+    });
+
+    fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+        setActiveNav();
+    });
+
+    function setActiveNav() {
+        const currentPage = window.location.pathname.split("/").pop();
+
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    const products = [
+        {
+            name: "Assrmox-CV-625",
+            price: 270,
+            image: "images/Assrmox-CV-625.webp"
+        },
+        {
+            name: "Assrpain-P",
+            price: 55,
+            image: "images/Assrpain-P.webp"
+        },
+        {
+            name: "Assrpain-SP",
+            price: 190,
+            image: "images/Assrpain-SP.webp"
+        },
+        {
+            name: "Assrpan-40",
+            price: 130,
+            image: "images/Assrpan-40.webp"
+        }
+    ];
+
+    const cartContainer = document.getElementById("cartContainer");
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+        if (cart.length === 0) {
+            cartContainer.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fa-solid fa-face-frown"></i>
+                    <h3>Your cart is currently empty!</h3>
+                    <h2>New in store</h2>
+
+                    <div class="recommended-products">
+                        ${products.map(product => `
+                            <div class="shop-card">
+                                <img src="${product.image}" alt="${product.name}">
+                                <h4>${product.name}</h4>
+                                <p>₹${product.price}</p>
+                                <button onclick='addToCart(${JSON.stringify(product)})'>
+                                    Add To Cart
+                                </button>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            `;
+        } else {
+            let total = cart.reduce(
+                (sum, item) => sum + (item.price * (item.quantity || 1)),
+                0
+            );
+
+            cartContainer.innerHTML = `
+                <div class="cart-layout">
+
+                    <div class="cart-items">
+                        ${cart.map((item, index) => `
+                        <div class="cart-item">
+                            <img src="${item.image}" alt="${item.name}">
+
+                            <div class="cart-info">
+                                <h4>${item.name}</h4>
+                                <p>₹${item.price}</p>
+
+                                <div class="quantity-box">
+                                    <button onclick="decreaseQty(${index})">−</button>
+                                    <span>${item.quantity || 1}</span>
+                                    <button onclick="increaseQty(${index})">+</button>
+                                </div>
+                            </div>
+
+                            <div class="cart-total">
+                                ₹${item.price * (item.quantity || 1)}
+                            </div>
+
+                            <button class="delete-btn" onclick="removeItem(${index})">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    `).join("")}
+                    </div>
+
+                    <div class="cart-summary">
+                        <h3>Cart Totals</h3>
+                        <h4>Estimated total ₹${total}</h4>
+                        <button>Proceed to Checkout</button>
+                    </div>
+
+                </div>
+            `;
+        }
+    }
+
+    function addToCart(product) {
+        const existingProduct = cart.find(item => item.name === product.name);
+
+        if (existingProduct) {
+            existingProduct.quantity = (existingProduct.quantity || 1) + 1;
+        } else {
+            product.quantity = 1;
+            cart.push(product);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+    }
+
+    function increaseQty(index) {
+        cart[index].quantity = (cart[index].quantity || 1) + 1;
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        renderCart();
+    }
+
+    function decreaseQty(index) {
+        if ((cart[index].quantity || 1) > 1) {
+            cart[index].quantity--;
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            renderCart();
+        }
+    }
+
+    renderCart();
+
+    fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("footer-section").innerHTML = data;
+    });
+
+    window.addEventListener("load", function () {
+    setTimeout(() => {
+        document.getElementById("preloader").classList.add("fade-out");
+    }, 2000);
+});
+
+</script>
+
+</body>
+</html>

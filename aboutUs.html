@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+     <div id="preloader">
+        <i class="fa-solid fa-heart-pulse"></i>
+    </div>
+
     <div id="top-header"></div>
     <header id="navbar"></header>
 
@@ -42,30 +46,27 @@
             <div class="about-line"></div>
 
             <p>
-                ASSR Life Sciences is a pharmaceutical supply company based in
-                Beharbari, Guwahati, Assam-781028. We manufacture and supply
-                our own allopathic formulations.
+                ASSR Life Sciences is a pharmaceutical supply company based in Beharbari, Guwahati, Assam–781028. We manufacture and supply our own allopathic formulations and, moreover, support pharmacies, doctors, and hospitals across India with dependable availability and fair pricing. Because patient continuity matters, we ship quickly, track each batch, and maintain transparent paperwork.
             </p>
 
             <div class="about-features about-page-features">
 
                 <div class="feature about-feature">
                     <i class="fa-solid fa-award"></i>
-                    <div>
+                    <div class="about-feature-text">
                         <h4>Quality & Compliance</h4>
                         <p>
-                            We align operations with ISO-based practices and
-                            maintain clear COAs and invoices.
+                            We align operations with ISO-based practices, verify batches, and maintain clear COAs and invoices. Therefore, partners receive consistent quality and easy audits.
                         </p>
                     </div>
                 </div>
 
                 <div class="feature about-feature">
                     <i class="fa-solid fa-flask"></i>
-                    <div>
+                    <div class="about-feature-text">
                         <h4>Speed & Service</h4>
                         <p>
-                            We quote fast, pack securely, and dispatch on time.
+                            We quote fast, pack securely, and dispatch on time. In addition, our team helps you plan reorders so the stock-outs are reduced and patient care continues smoothly.
                         </p>
                     </div>
                 </div>
@@ -108,25 +109,25 @@
 
         <div class="stat-box">
             <i class="fa-solid fa-capsules"></i>
-            <h2>250+</h2>
+            <h2 class="counter" data-target="250">0+</h2>
             <p>partner pharmacies and clinics served</p>
         </div>
 
         <div class="stat-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <h2>120+</h2>
+            <h2 class="counter" data-target="120">0+</h2>
             <p>active SKUs under the ASSR label</p>
         </div>
 
         <div class="stat-box">
             <i class="fa-solid fa-briefcase-medical"></i>
-            <h2>12+</h2>
+            <h2 class="counter" data-target="12">0+</h2>
             <p>therapeutic categories supported</p>
         </div>
 
         <div class="stat-box">
             <i class="fa-regular fa-clock"></i>
-            <h2>99%</h2>
+            <h2 class="counter" data-target="99">0%</h2>
             <p>on-time dispatch rate</p>
         </div>
 
@@ -275,15 +276,98 @@
 
 </section>
 
-<section class="video-banner about-cta">
+<section class="faq-section">
 
+    <div class="bg-text faq-bg-text">Faqs</div>
+
+    <div class="faq-container">
+
+        <!-- Left Content -->
+        <div class="faq-left">
+            <span class="faq-subtitle">Why Choose Us</span>
+
+            <h2>Have Any Questions?<br>Feel Free To Ask.</h2>
+
+            <div class="faq-line"></div>
+
+            <p>
+                Below are quick answers to the questions partners ask most
+                about our coverage, brand, pricing, and support. We keep
+                everything simple, transparent, and responsive. If you need
+                anything beyond this list, our team will help right away.
+            </p>
+        </div>
+
+        <!-- Right Accordion -->
+        <div class="faq-right">
+
+            <div class="faq-item active">
+                <div class="faq-question">
+                    <h3>01. Which regions do you serve?</h3>
+                    <span>⌄</span>
+                </div>
+
+                <div class="faq-answer">
+                    <p>
+                        We serve pharmacies, clinics, and hospitals in all states of India.
+                        We arrange reliable shipping with tracking so deliveries reach you on time.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>02. Do you supply your own brand?</h3>
+                    <span>⌄</span>
+                </div>
+
+                <div class="faq-answer">
+                    <p>
+                        Yes, we manufacture and distribute our own ASSR label formulations.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>03. How do you keep prices affordable?</h3>
+                    <span>⌄</span>
+                </div>
+
+                <div class="faq-answer">
+                    <p>
+                        Through efficient supply chains, bulk production, and streamlined logistics.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>04. Can you support standing orders?</h3>
+                    <span>⌄</span>
+                </div>
+
+                <div class="faq-answer">
+                    <p>
+                        Yes, we support recurring and scheduled supply orders.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="video-banner about-video-banner">
+
+    <!-- Overlay -->
     <div class="overlay"></div>
 
     <div class="video-banner-content">
 
         <!-- Left Content -->
         <div class="banner-text">
-
             <span>Get In Touch</span>
 
             <h2>Plan Your Next Supply With Confidence</h2>
@@ -294,20 +378,30 @@
             </p>
 
             <div class="banner-buttons">
-                <a href="#" class="contact-btn">Contact Us | +</a>
+                <a href="contactUs.html" class="contact-btn">Contact Us | +</a>
                 <a href="#" class="download-btn">Medicines | +</a>
             </div>
-
         </div>
 
         <!-- Play Button -->
-        <div class="video-play-btn" id="playBtn">
-            <i class="fa-solid fa-play"></i>
-        </div>
-
+         <div class="video-play-btn-container">
+              <div class="video-play-btn" id="playBtn">
+                <i class="fa-solid fa-play"></i>
+            </div>
+         </div>
     </div>
-
 </section>
+
+<!-- Video Popup -->
+<div class="video-popup" id="videoPopup">
+    <div class="video-container">
+        <span class="close-video" id="closeVideo">&times;</span>
+
+        <video controls id="popupVideo">
+            <source src="videos/demo-video.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
 
 <footer id="footer-section"></footer>
 
@@ -318,15 +412,126 @@
             document.getElementById("top-header").innerHTML = data;
         });
         fetch("navbar.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("navbar").innerHTML = data;
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        setActiveNav();   // run after navbar loads
+    });
+
+    function setActiveNav() {
+    const currentPage = window.location.pathname.split("/").pop();
+
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
+}
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+    const question = item.querySelector(".faq-question");
+
+    question.addEventListener("click", () => {
+
+        faqItems.forEach(faq => {
+            if (faq !== item) {
+                faq.classList.remove("active");
+            }
         });
-         fetch("footer.html")
+
+        item.classList.toggle("active");
+    });
+});
+
+fetch("footer.html")
         .then(response => response.text())
         .then(data => {
             document.getElementById("footer-section").innerHTML = data;
+    });
+
+    const playBtn = document.getElementById("playBtn");
+    const videoPopup = document.getElementById("videoPopup");
+    const closeVideo = document.getElementById("closeVideo");
+    const popupVideo = document.getElementById("popupVideo");
+
+    playBtn.onclick = function () {
+        videoPopup.style.display = "flex";
+        popupVideo.play();
+    };
+
+    closeVideo.onclick = function () {
+        videoPopup.style.display = "none";
+        popupVideo.pause();
+        popupVideo.currentTime = 0;
+    };
+
+    // close when clicking outside video
+    videoPopup.onclick = function (e) {
+        if (e.target === videoPopup) {
+            videoPopup.style.display = "none";
+            popupVideo.pause();
+            popupVideo.currentTime = 0;
+        }
+    };
+
+    window.addEventListener("load", function () {
+    setTimeout(() => {
+        document.getElementById("preloader").classList.add("fade-out");
+    }, 2000);
+});
+
+const counters = document.querySelectorAll(".counter");
+let started = false;
+
+function startCounter() {
+    const statsSection = document.querySelector(".stats-highlight");
+
+    const sectionTop = statsSection.getBoundingClientRect().top;
+    const screenHeight = window.innerHeight;
+
+    if (sectionTop < screenHeight - 100 && !started) {
+        started = true;
+
+        counters.forEach(counter => {
+            const target = +counter.getAttribute("data-target");
+            let count = 0;
+
+            const increment = target / 100;
+
+            const updateCount = () => {
+                if (count < target) {
+                    count += increment;
+
+                    // check if contains %
+                    if (counter.innerText.includes("%")) {
+                        counter.innerText = Math.ceil(count) + "%";
+                    } else {
+                        counter.innerText = Math.ceil(count) + "+";
+                    }
+
+                    requestAnimationFrame(updateCount);
+                } else {
+                    if (counter.innerText.includes("%")) {
+                        counter.innerText = target + "%";
+                    } else {
+                        counter.innerText = target + "+";
+                    }
+                }
+            };
+
+            updateCount();
         });
-    </script>
+    }
+}
+
+window.addEventListener("scroll", startCounter);
+
+</script>
+    <script src="script.js"></script>
 </body>
 </html>

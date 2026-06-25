@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assr Life Sciences</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div id="preloader">
+        <i class="fa-solid fa-heart-pulse"></i>
+    </div>
+
+    <div id="top-header"></div>
+    <header id="navbar"></header>
+
+         <section class="about-hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Contact Us</h1>
+
+        <div class="breadcrumb">
+            <a href="index.html">assrlifesciences.com</a>
+            <span>›</span>
+            <p>Contact Us</p>
+        </div>
+    </div>
+</section>
+
+<section class="services-section contact-info-section">
+
+    <div class="bg-text services-bg-text">Contact</div>
+
+    <div class="section-title">
+        <span>Get In Touch</span>
+        <h2>We’re Ready To Support Your Supply Needs.</h2>
+        <div class="underline"></div>
+    </div>
+
+    <div class="services-container contact-cards">
+
+        <!-- Phone -->
+        <div class="contact-card">
+            <div class="contact-icon-box">
+                <i class="fa-solid fa-phone-volume"></i>
+            </div>
+
+            <div class="contact-details">
+                <h3>Phone:</h3>
+                <p>+91 3613174300</p>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="contact-card">
+            <div class="contact-icon-box">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div class="contact-details">
+                <h3>Office Address:</h3>
+                <p>Beharbari,<br>Guwahati, 781028, Assam</p>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="contact-card">
+            <div class="contact-icon-box">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <div class="contact-details">
+                <h3>Email:</h3>
+                <p>assrlifesciences@gmail.com</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="contact-booking">
+
+    <div class="booking-wrapper">
+
+        <!-- Left image -->
+        <div class="booking-image">
+            <img src="images/doctors.webp" alt="Doctors">
+        </div>
+
+        <!-- Right form -->
+        <div class="booking-form">
+
+            <span class="booking-tag">Book Now</span>
+            <h2>Feel Free To Contact</h2>
+            <div class="booking-line"></div>
+
+            <form>
+
+                <div class="booking-row">
+                    <input type="text" placeholder="Name*">
+                    <input type="email" placeholder="Email*">
+                </div>
+
+                <div class="booking-row">
+                    <select>
+                        <option>Choose A Service</option>
+                        <option>Health Care</option>
+                        <option>Neuro Care</option>
+                        <option>ENT Care</option>
+                        <option>Gynecology</option>
+                        <option>Urology</option>
+                    </select>
+
+                    <select>
+                        <option>Select Doctors</option>
+                        <option>Md Nadim Khan</option>
+                        <option>Md Imran Khan</option>
+                        <option>Shafiqur Rahman</option>
+                        <option>Shafiul Amin</option>
+                    </select>
+                </div>
+
+                <div class="booking-row">
+                    <input type="date">
+
+                    <select>
+                        <option>Select Branch</option>
+                        <option>New York</option>
+                        <option>Los Angeles</option>
+                        <option>New Jersey</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="booking-btn">
+                    SEND NOW | +
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+    <footer id="footer-section"></footer>
+    <script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("top-header").innerHTML = data;
+        });
+        fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+
+        setActiveNav();   // run after navbar loads
+    });
+
+function setActiveNav() {
+    const currentPage = window.location.pathname.split("/").pop();
+
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
+}
+
+fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer-section").innerHTML = data;
+        });
+
+        window.addEventListener("load", function () {
+    setTimeout(() => {
+        document.getElementById("preloader").classList.add("fade-out");
+    }, 2000);
+});
+
+    </script>
+</body>
+</html>
