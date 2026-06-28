@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assr Life Sciences</title>
+    <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
 <div id="preloader">
-    <i class="fa-solid fa-heart-pulse"></i>
-</div>
+      <img src="images/loadIcon.png" alt="">
+    </div>
 
 <div id="top-header"></div>
 <header id="navbar"></header>
@@ -33,6 +34,11 @@
 <section class="shop-section">
 
     <div class="shop-topbar">
+
+        <div class="view-icons">
+            <i class="fa-solid fa-table-cells-large active" id="gridView"></i>
+            <i class="fa-solid fa-list-ul" id="listView"></i>
+        </div>
 
         <div class="shop-result">
             Showing <span id="resultCount"></span> results
@@ -154,11 +160,11 @@
 
                     <div class="product-overlay">
                         <button class="icon-btn" onclick='addToCart(${JSON.stringify(product)})'>
-                            <i class="fa-solid fa-cart-shopping"></i>
+                            <i class="flaticon-shopping-cart-1"></i>
                         </button>
 
                         <button class="icon-btn">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="flaticon-search-1"></i>
                         </button>
                     </div>
                 </div>
@@ -243,6 +249,31 @@
     renderProducts(filteredProducts, currentPage);
     renderPagination(filteredProducts);
 
+    const gridBtn = document.getElementById("gridView");
+const listBtn = document.getElementById("listView");
+const productGrid = document.getElementById("productsGrid");
+
+// Default view
+productGrid.classList.add("grid-view");
+
+// Grid View
+gridBtn.addEventListener("click", function () {
+    productGrid.classList.remove("list-view");
+    productGrid.classList.add("grid-view");
+
+    gridBtn.classList.add("active");
+    listBtn.classList.remove("active");
+});
+
+// List View
+listBtn.addEventListener("click", function () {
+    productGrid.classList.remove("grid-view");
+    productGrid.classList.add("list-view");
+
+    listBtn.classList.add("active");
+    gridBtn.classList.remove("active");
+});
+    
     fetch("footer.html")
     .then(response => response.text())
     .then(data => {
