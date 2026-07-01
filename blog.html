@@ -21,63 +21,71 @@
     <div class="overlay"></div>
 
     <div class="hero-content">
-        <h1>Galleries</h1>
+        <h1>Blog</h1>
 
         <div class="breadcrumb">
             <a href="index.html">assrlifesciences.com</a>
             <span>›</span>
-            <p>Gallery</p>
+            <p>Blog</p>
         </div>
     </div>
     </section>
 
-    <section class="blog-page">
+<section class="blog-details">
     <div class="container">
 
-        <!-- Left Content -->
-        <div class="blog-left">
-            <div class="blog-card">
-                <section class="hero-slider">
-                    <div class="slider-container">
-                        <div class="slide">
-                            <img src="images/GalleryImages/blog-2.webp" alt="Slider Image">
-                        </div>
-                        <div class="slide">
-                            <img src="images/GalleryImages/blog-72.webp" alt="Slider Image">
-                        </div>
-                        <div class="slide active">
-                            <img src="images/GalleryImages/blog-8.webp" alt="Slider Image">
-                        </div>
+        <!-- LEFT CONTENT -->
+        <div class="blog-main">
+
+           <div id="blog-content"></div>
+
+            <div class="comment-form">
+            <h3>Leave A Comment</h3>
+            <p>All fields marked with an asterisk (*) are required</p>
+
+            <form>
+                <div class="form-row">
+                    <div class="input-box">
+                        <input type="text" placeholder="Name*">
+                        <i class="fa-regular fa-user"></i>
                     </div>
-                    <!-- Slider Arrows -->
-                    <button class="slider-btn prev"><i class="flaticon-long-left-arrow"></i></button>
-                    <button class="slider-btn next"><i class="flaticon-long-right-arrow"></i></button>
-                    </section>
-                <!-- Meta -->
-                <div class="blog-meta">
-                    <span><i class="fa-regular fa-user"></i>manobkalanhealthcare@gmail.com</span>
-                    <span><i class="fa-regular fa-calendar"></i> June 10, 2022</span>
-                    <span><i class="fa-regular fa-comments"></i> 3 Comments</span>
-                    <span><i class="fa-regular fa-folder"></i>Dental Surgery, Uncategorized</span>
+
+                    <div class="input-box">
+                        <input type="email" placeholder="Email*">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
                 </div>
 
-                <h2>Every seconds someone develops the rare eye disease.</h2>
+                <div class="input-box full-width">
+                    <input type="text" placeholder="Website">
+                    <i class="fa-solid fa-earth-europe"></i>
+                </div>
 
-                <p>
-                    A wonderful serenity has take possion of my entire souing like these sweet mornng spring whch enjoy the with my whole heart I am alone, and feel the charm of existenc the spot whch was create For then bliss of souls like mineing am so happy my dear frend so [...]
-                </p>
+                <div class="checkbox-box">
+                    <input type="checkbox" id="save-info">
+                    <label for="save-info">
+                        Save my name, email, and website in this browser for the next time I comment.
+                    </label>
+                </div>
 
-                <a href="blog.html?post=3" class="read-btn">Read More | +</a>
-            </div>
+                <div class="input-box full-width textarea-box">
+                    <textarea placeholder="Your Comment*"></textarea>
+                    <i class="fa-solid fa-pencil"></i>
+                </div>
+
+                <button type="submit" class="contact-btn">Post Comment <span>| +</span></button>
+            </form>
         </div>
 
-        <!-- Sidebar -->
+        </div>
+
+        <!-- SIDEBAR -->
         <div class="blog-sidebar">
 
             <!-- Search -->
             <div class="sidebar-box">
                 <div class="search-box">
-                    <input type="text">
+                    <input type="text" placeholder="Search...">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
@@ -98,27 +106,25 @@
             <div class="sidebar-box">
                 <h3>Recent Comments</h3>
                 <ul>
-                    <li><a href=""> <i class="fa-solid fa-angles-right"></i> A WordPress Commenter on Hello world!</a></li>
-                    <li><a href=""> <i class="fa-solid fa-angles-right"></i> Nadim Khan on Study finds link between early stages of brain and heart disease.</a></li>
-                    <li><a href=""> <i class="fa-solid fa-angles-right"></i> ThemeDraft on Study finds link between early stages of brain and heart disease.</a></li>
-                    <li><a href=""> <i class="fa-solid fa-angles-right"></i> Nadim Khan on Study finds link between early stages of brain and heart disease.</a></li>
-                    <li><a href=""> <i class="fa-solid fa-angles-right"></i> Nadim Khan on Every seconds someone develops the rare eye disease.</a></li>
+                    <li><a href="blog.html?post=1"> <i class="fa-solid fa-angles-right"></i>  A WordPress Commenter on Hello world!</a></li>
+                    <li><a href="blog.html?post=2"> <i class="fa-solid fa-angles-right"></i>  Nadim Khan on Study finds link between early stages of brain and heart disease.</a></li>
+                    <li><a href="blog.html?post=3"> <i class="fa-solid fa-angles-right"></i>  ThemeDraft on Study finds link between early stages of brain and heart disease.</a></li>
+                    <li><a href="blog.html?post=4"> <i class="fa-solid fa-angles-right"></i>  Nadim Khan on Study finds link between early stages of brain and heart disease.</a></li>
+                    <li><a href="blog.html?post=5"> <i class="fa-solid fa-angles-right"></i>  Nadim Khan on Every seconds someone develops the rare eye disease.</a></li>
                 </ul>
             </div>
 
             <!-- Search -->
             <div class="sidebar-box">
                 <div class="search-box">
-                    <input type="text">
+                    <input type="text" placeholder="Search...">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
 
-
-            <!-- Categories -->
             <div class="sidebar-box">
                 <h3>Categories</h3>
-                <ul class="categories">
+                <ul>
                     <li class="category"> <i class="fa-solid fa-angles-right"></i> Dental Surgery <span>(2)</span></li>
                     <li class="category"> <i class="fa-solid fa-angles-right"></i> ENT Department <span>(2)</span></li>
                     <li class="category"> <i class="fa-solid fa-angles-right"></i> Neuro Surgery <span>(1)</span></li>
@@ -231,8 +237,8 @@
 
             <!-- Downloads -->
             <div class="download-box">
-                <a href="#">Download PDF | ↓</a>
-                <a href="#">Download Brochure | ↓</a>
+                <a href="#">Download PDF | <span><i class="fa-regular fa-file-pdf"></i></span></a>
+                <a href="#">Download Brochure | <span><i class="fa-regular fa-file-pdf"></i></span></a>
             </div>
 
             <!-- Gallery -->
@@ -252,11 +258,11 @@
             </div>
 
         </div>
+
     </div>
 </section>
 
-    <footer id="footer-section"></footer>
-    <script src="script.js"></script>
+<footer id="footer-section"></footer>
     <script>
     fetch("header.html")
         .then(response => response.text())
@@ -282,7 +288,7 @@
             }
         });
     }
-
+    
     fetch("footer.html")
         .then(response => response.text())
         .then(data => {
@@ -306,6 +312,6 @@
         });
     }
     </script>
-    
+    <script src="script.js"></script>
 </body>
 </html>

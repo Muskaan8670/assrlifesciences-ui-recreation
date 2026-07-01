@@ -97,18 +97,4 @@ setInterval(() => {
 
 showTestimonialSlide(testimonialIndex);
 
-const playBtn = document.getElementById("playBtn");
-const videoPopup = document.getElementById("videoPopup");
-const closeVideo = document.getElementById("closeVideo");
-const popupVideo = document.getElementById("popupVideo");
-
-playBtn.addEventListener("click", () => {
-    videoPopup.classList.add("active");
-    popupVideo.play();
-});
-
-closeVideo.addEventListener("click", () => {
-    videoPopup.classList.remove("active");
-    popupVideo.pause();
-    popupVideo.currentTime = 0;
-});
+const playBtn = document.getElementById("playBtn"); const videoPopup = document.getElementById("videoPopup"); const closeVideo = document.getElementById("closeVideo"); const popupVideo = document.getElementById("popupVideo"); playBtn.addEventListener("click", () => { videoPopup.classList.add("active"); popupVideo.play(); }); closeVideo.addEventListener("click", () => { videoPopup.classList.remove("active"); popupVideo.pause(); popupVideo.currentTime = 0; });

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assr Life Sciences</title>
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div id="preloader">
+      <img src="images/loadIcon.png" alt="">
+</div>
+
+<div id="top-header"></div>
+<header id="navbar"></header>
+
+<section class="about-hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+        <h1>Checkout</h1>
+
+        <div class="breadcrumb">
+            <a href="index.html">assrlifesciences.com</a>
+            <span>›</span>
+            <p>Checkout</p>
+        </div>
+    </div>
+</section>
+
+<section class="checkout-section">
+
+    <div class="checkout-layout">
+
+        <!-- LEFT -->
+        <div class="checkout-form">
+
+            <h3>Contact Information</h3>
+
+            <input type="email" placeholder="Email address">
+            <p class="guest-text">You are currently checking out as a guest.</p>
+
+            <h3>Billing address</h3>
+
+            <select>
+                <option>United States (US)</option>
+            </select>
+
+            <div class="double-field">
+                <input type="text" placeholder="First name">
+                <input type="text" placeholder="Last name">
+            </div>
+
+            <input type="text" placeholder="Company (optional)">
+            <input type="text" placeholder="Address">
+
+            <div class="double-field">
+                <input type="text" placeholder="City">
+                <input type="text" placeholder="State">
+            </div>
+
+            <div class="double-field">
+                <input type="text" placeholder="ZIP Code">
+                <input type="text" placeholder="Phone">
+            </div>
+
+            <h3>Payment options</h3>
+
+            <div class="payment-box">
+                <label>
+                    <input type="radio" name="payment">
+                    Cash on delivery
+                </label>
+
+                <label>
+                    <input type="radio" name="payment">
+                    Online payment
+                </label>
+            </div>
+
+            <div class="order-note">
+                <label>
+                    <input type="checkbox">
+                    Add a note to your order
+                </label>
+            </div>
+
+            <p class="terms-text">
+                By proceeding with your purchase you agree to our Terms and Conditions and Privacy Policy.
+            </p>
+
+            <div class="checkout-actions">
+                <a href="cart.html" class="back-btn">← Cart</a>
+                <button class="place-order-btn">Place Order</button>
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+
+            <div id="checkoutProducts"></div>
+
+            <div class="coupon-box">
+
+            <div class="coupon-toggle" onclick="toggleCoupon()">
+                <span>Add coupons</span>
+
+                <svg id="couponArrow" class="coupon-arrow" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M7 10L12 15L17 10"/>
+                </svg>
+            </div>
+
+            <div class="coupon-input" id="couponInput">
+                <input type="text" placeholder="Enter code">
+                <button>Apply</button>
+            </div>
+
+        </div>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotalPrice"></span>
+            </div>
+
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="totalPrice"></span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<footer id="footer-section"></footer>
+
+<script>
+    fetch("header.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("top-header").innerHTML = data;
+    });
+
+    fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+        setActiveNav();
+    });
+
+    function setActiveNav() {
+        const currentPage = window.location.pathname.split("/").pop();
+
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    function toggleCoupon() {
+        const coupon = document.getElementById("couponInput");
+        const arrow = document.getElementById("couponArrow");
+
+        coupon.classList.toggle("active");
+        arrow.classList.toggle("rotate");
+    }
+
+    const checkoutProducts = document.getElementById("checkoutProducts");
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function renderCheckoutProducts() {
+    let total = 0;
+
+    checkoutProducts.innerHTML = cart.map(item => {
+        const itemTotal = item.price * (item.quantity || 1);
+        total += itemTotal;
+
+        return `
+            <div class="summary-product">
+                <img src="${item.image}" alt="${item.name}">
+
+                <div>
+                    <h4>${item.name}</h4>
+                    <p>₹${item.price} × ${item.quantity || 1}</p>
+                </div>
+
+                <span>₹${itemTotal}</span>
+            </div>
+        `;
+    }).join("");
+
+    document.getElementById("subtotalPrice").innerText = `₹${total}`;
+    document.getElementById("totalPrice").innerText = `₹${total}`;
+}
+
+renderCheckoutProducts();
+
+    fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer-section").innerHTML = data;
+        });
+
+        window.addEventListener("load", function () {
+        setTimeout(() => {
+            document.getElementById("preloader").classList.add("fade-out");
+        }, 2000);
+    });
+
+</script>
+
+</body>
+</html>
